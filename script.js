@@ -24,7 +24,7 @@ const PARTNER_ORDERS_COLLECTION = 'partner_orders';
 
 const GROUP_OPTIONS = ['پیتزا','بەرگر','سپاگێتی','فینگەر','لەفە','مریشک','ماسی','خواردنەوەکان'];
 
-// ============ BUSINESS DAY UTILS ============
+/* ============ BUSINESS DAY UTILS ============ */
 function getBusinessDayStart(timestamp) {
     const d = new Date(timestamp);
     if (d.getHours() < 2 || (d.getHours() === 2 && d.getMinutes() < 30)) {
@@ -73,7 +73,7 @@ function toast(msg, isErr = false) {
 }
 function genId() { return 'id_' + Date.now() + '_' + Math.random().toString(36).substr(2,4); }
 
-// ============ STATE ============
+/* ============ STATE ============ */
 const state = {
     currentPage: 'login',
     currentRole: null,
@@ -95,7 +95,7 @@ const state = {
     monthlyResetTimestamp: null
 };
 
-// ============ RESETS ============
+/* ============ RESETS ============ */
 async function performMonthlyReset() {
     const nowD = new Date();
     const bd = getCurrentBusinessDayStart();
@@ -132,7 +132,7 @@ async function loadResetTimestamps() {
     } catch(e) { console.error(e); }
 }
 
-// ============ FIRESTORE ============
+/* ============ FIRESTORE ============ */
 function loadItemsFromFirestore() {
     if (state.unsubscribeItems) state.unsubscribeItems();
     try {
@@ -225,7 +225,7 @@ function loadPartnerOrdersFromFirestore() {
     });
 }
 
-// ============ RENDER ============
+/* ============ RENDER ============ */
 function render() {
     const app = document.getElementById('app');
     if (!app) return;
@@ -265,20 +265,26 @@ function renderLogin() {
 }
 
 function renderManager() {
-    return renderManagerFull();
-}
-
-function renderManagerFull() {
     let filteredItems = state.items.filter(i => i.branch === state.selectedBranch);
     const itemsHtml = filteredItems.map(item => `
         <tr>
-            <td>${item.image ? `<img src="${item.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none';"/>` : '🍽️'} ${item.name} <span class="branch-tag zanco">${item.branch}</span></td>
-            <td>${formatPrice(item.price)}</td>
-            <td>${item.partnerPrices ? Object.entries(item.partnerPrices).filter(([k,v])=>v!=null).map(([k,v])=>`${k}: ${formatPrice(v)}`).join('<br/>') : '-'}</td>
-            <td>${item.group || 'گشتی'}</td>
+            <td style="min-width:90px;">
+                ${item.image ? `<img src="${item.image}" style="width:34px;height:34px;border-radius:6px;object-fit:cover;vertical-align:middle;" onerror="this.style.display='none';"/>` : '🍽️'} 
+                <span style="font-size:11px;">${item.name}</span>
+            </td>
+            <td style="font-size:11px;">${formatPrice(item.price)}</td>
+            <td style="font-size:10px;line-height:1.5;">
+                ${item.partnerPrices 
+                    ? Object.entries(item.partnerPrices)
+                        .filter(([k,v])=>v!=null)
+                        .map(([k,v])=>`<span style="display:inline-block;background:#f1f5f9;padding:1px 5px;border-radius:4px;margin:1px;">${k}: ${formatPrice(v)}</span>`)
+                        .join('')
+                    : '-'}
+            </td>
+            <td style="font-size:10px;">${item.group || 'گشتی'}</td>
             <td>
-                <button class="btn btn-sm btn-warning" data-action="edit-item" data-id="${item.id}">✏️</button>
-                <button class="btn btn-sm btn-danger" data-action="delete-item" data-id="${item.id}">🗑️</button>
+                <button class="btn btn-sm btn-warning" data-action="edit-item" data-id="${item.id}" style="padding:4px 6px;font-size:11px;">✏️</button>
+                <button class="btn btn-sm btn-danger" data-action="delete-item" data-id="${item.id}" style="padding:4px 6px;font-size:11px;">🗑️</button>
             </td>
         </tr>`).join('');
 
@@ -294,8 +300,6 @@ function renderManagerFull() {
     const cashierStatsHtml = Object.entries(cashierStats).length ?
         Object.entries(cashierStats).map(([n,c])=>`<div class="stat-card"><div class="number">${c}</div><div class="label">${n}</div></div>`).join('')
         : '<p style="grid-column:1/-1;color:#94a3b8;">هیچ داتایەک نییە</p>';
-
-    const partnerOrders = state.partnerOrders.filter(o => isSameBusinessDay(o.timestamp, Date.now()));
 
     return `
         <div>
@@ -314,7 +318,7 @@ function renderManagerFull() {
 
             ${state.managerTab==='dashboard' ? `
                 <div class="dashboard">
-                    <h3 style="font-size:18px;margin-bottom:10px;">📊 داشبۆردی ساڵە و سەفەری <span class="live-indicator"></span> لایڤ</h3>
+                    <h3 style="font-size:16px;margin-bottom:10px;">📊 داشبۆردی ساڵە و سەفەری <span class="live-indicator"></span></h3>
                     <div class="stats-grid">
                         <div class="stat-card"><div class="number">${formatPrice(morningRev)}</div><div class="label">شەفتی بەیانی (٩-٥:٣٠)</div></div>
                         <div class="stat-card"><div class="number">${formatPrice(nightRev)}</div><div class="label">شەفتی شەو (٥:٣٠-٣)</div></div>
@@ -325,10 +329,10 @@ function renderManagerFull() {
                         <div class="stat-card"><div class="number">${night.length}</div><div class="label">ئۆردەری شەو</div></div>
                         <div class="stat-card"><div class="number">${todayOrders.length}</div><div class="label">کۆی ئۆردەر</div></div>
                     </div>
-                    <h4 style="font-size:15px;margin:12px 0 8px;">📊 ئاماری کاشێرەکان</h4>
+                    <h4 style="font-size:14px;margin:12px 0 8px;">📊 ئاماری کاشێرەکان</h4>
                     <div class="stats-grid">${cashierStatsHtml}</div>
-                    <h4 style="font-size:15px;margin:12px 0 8px;">📋 کۆی ئۆردەرەکان</h4>
-                    <div style="max-height:250px;overflow-y:auto;border:2px solid #e2e8f0;border-radius:10px;padding:8px;">
+                    <h4 style="font-size:14px;margin:12px 0 8px;">📋 کۆی ئۆردەرەکان</h4>
+                    <div style="max-height:260px;overflow-y:auto;border:2px solid #e2e8f0;border-radius:10px;padding:6px;">
                         ${todayOrders.length ? todayOrders.map((o,i)=>`
                             <div class="order-item" style="border-right-color:${o.orderType==='dine'?'#3498db':'#f39c12'};">
                                 <span style="font-weight:700;color:#6c5ce7;">${i+1}</span>
@@ -336,20 +340,20 @@ function renderManagerFull() {
                                 <span style="flex:1;">${o.items.map(it=>`${it.name} ×${it.qty}`).join('، ')}</span>
                                 <span style="font-weight:700;">${formatPrice(o.total)}</span>
                                 ${o.discount>0?`<span style="font-size:9px;color:#e17055;">🔖%${o.discount}</span>`:''}
-                                <span style="font-size:11px;color:#64748b;">${o.time}</span>
-                                <span style="font-size:11px;color:#64748b;">${o.cashier||''}</span>
+                                <span style="font-size:10px;color:#64748b;">${o.time}</span>
+                                <span style="font-size:10px;color:#64748b;">${o.cashier||''}</span>
                             </div>`).join('') : '<p style="color:#94a3b8;text-align:center;padding:16px;">هیچ ئۆردەرێک نییە</p>'}
                     </div>
                 </div>` : ''}
 
             ${state.managerTab==='items' ? `
                 <div class="dashboard">
-                    <h3 style="font-size:18px;margin-bottom:10px;">🛒 بەڕێوەبردنی ئایتمەکان</h3>
-                    <button class="btn btn-primary" data-action="show-add-item" style="width:auto;display:inline-block;padding:8px 20px;font-size:14px;">➕ زیاد کردنی ئایتم</button>
-                    <div style="overflow-x:auto;margin-top:12px;">
+                    <h3 style="font-size:16px;margin-bottom:10px;">🛒 بەڕێوەبردنی ئایتمەکان</h3>
+                    <button class="btn btn-primary" data-action="show-add-item" style="width:auto;display:inline-block;padding:8px 20px;font-size:13px;">➕ زیاد کردنی ئایتم</button>
+                    <div style="overflow-x:auto;margin-top:12px;-webkit-overflow-scrolling:touch;">
                         <table>
-                            <thead><tr><th>ناو / لق</th><th>نرخ</th><th>نرخی شەریکە</th><th>گرووپ</th><th>کردار</th></tr></thead>
-                            <tbody>${itemsHtml || '<tr><td colspan="5" style="color:#94a3b8;">هیچ ئایتمێک نییە</td></tr>'}</tbody>
+                            <thead><tr><th>ناو</th><th>نرخ</th><th>شەریکە</th><th>گرووپ</th><th>کردار</th></tr></thead>
+                            <tbody>${itemsHtml || '<tr><td colspan="5" style="color:#94a3b8;text-align:center;">هیچ ئایتمێک نییە</td></tr>'}</tbody>
                         </table>
                     </div>
                 </div>` : ''}
@@ -364,7 +368,7 @@ function renderPartnerDetail() {
     const partnerOrders = state.partnerOrders.filter(o => isSameBusinessDay(o.timestamp, Date.now()));
     return `
         <div class="dashboard" style="margin-top:16px;">
-            <h3 style="font-size:18px;margin-bottom:10px;">📊 دیتەیڵی شەریکەکان <span class="live-indicator"></span></h3>
+            <h3 style="font-size:16px;margin-bottom:10px;">📊 دیتەیڵی شەریکەکان <span class="live-indicator"></span></h3>
             <div class="partner-detail-grid">
                 ${['talabat','zuu','wade','leezu'].map(p => {
                     const orders = partnerOrders.filter(o=>o.partner===p);
@@ -470,7 +474,7 @@ function renderItemModal() {
                 </div>
                 <div class="form-group"><label>لینکی وێنە</label><input type="text" id="item-image" value="${item?item.image||'':''}"/></div>
                 <hr style="margin:12px 0;border-color:#e2e8f0;"/>
-                <h4 style="margin-bottom:8px;">نرخی شەریکەکان</h4>
+                <h4 style="margin-bottom:8px;font-size:14px;">نرخی شەریکەکان</h4>
                 ${['talabat','zuu','wade','leezu'].map(p=>`
                     <div class="form-group"><label>${p.toUpperCase()}</label>
                         <input type="number" id="partner-price-${p}" value="${item&&item.partnerPrices&&item.partnerPrices[p]!=null?item.partnerPrices[p]:''}" step="100"/>
@@ -483,7 +487,7 @@ function renderItemModal() {
         </div>`;
 }
 
-// ============ EVENTS ============
+/* ============ EVENTS ============ */
 function attachEvents() {
     document.querySelectorAll('[data-action="login-manager"]').forEach(el => {
         el.onclick = () => {
@@ -569,7 +573,7 @@ function attachEvents() {
     });
 }
 
-// ============ INIT ============
+/* ============ INIT ============ */
 async function init() {
     state.isLoading = true;
     render();
