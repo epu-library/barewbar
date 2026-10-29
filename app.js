@@ -24,6 +24,13 @@ const PARTNER_ORDERS_COLLECTION = 'partner_orders';
 
 const GROUP_OPTIONS = ['پیتزا','بەرگر','سپاگێتی','فینگەر','لەفە','مریشک','ماسی','خواردنەوەکان'];
 
+// ============ لۆگۆی شەریکەکان ============
+const PARTNER_LOGOS = {
+    talabat: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGRS3jOlaVmLGzt8mBEaq37ajNGfES2-0S-eR6fzyJv1wIndRH19hr0mw&s=10',
+    wade: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA8Jee5KhObkaRCr1jdElCvp6ZoSSCw2K9Eok9bqmAKfi97qLX_7Xu4I9u&s=10',
+    leezu: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ06dhZYNHXa2dEd3a3oAjJtFAddNNvY6iSDo6W808evw&s=10'
+};
+
 // ============ BUSINESS DAY UTILS ============
 function getBusinessDayStart(timestamp) {
     const d = new Date(timestamp);
@@ -367,11 +374,11 @@ function renderPartnerDetail() {
                 ${['talabat','zuu','wade','leezu'].map(p => {
                     const orders = partnerOrders.filter(o=>o.partner===p);
                     const total = orders.reduce((s,o)=>s+(o.total||0),0);
-                    const logo = `https://i.ibb.co/${p==='talabat'?'gMT6mBmc':p==='zuu'?'gMT6mBmc':p==='wade'?'gMT6mBmc':'gMT6mBmc'}/unnamed.webp`;
+                    const logo = PARTNER_LOGOS[p] || '';
                     return `
                         <div class="partner-detail-card" data-partner="${p}">
                             <div class="partner-detail-header">
-                                <img src="${logo}" class="partner-detail-logo" onerror="this.style.display='none';"/>
+                                ${logo ? `<img src="${logo}" class="partner-detail-logo" onerror="this.style.display='none';"/>` : ''}
                                 <span class="partner-detail-name">${p.toUpperCase()}</span>
                             </div>
                             <div class="partner-detail-stats">
