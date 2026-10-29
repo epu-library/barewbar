@@ -27,6 +27,7 @@ const GROUP_OPTIONS = ['پیتزا','بەرگر','سپاگێتی','فینگەر'
 // ============ لۆگۆی شەریکەکان ============
 const PARTNER_LOGOS = {
     talabat: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGRS3jOlaVmLGzt8mBEaq37ajNGfES2-0S-eR6fzyJv1wIndRH19hr0mw&s=10',
+    zuu: 'https://play-lh.googleusercontent.com/-kchbtgXRG-bWkGgNeI_pKcksPSUj0WiOpvoIB8zl4gjs3VEm0dDZs2tZ8zNqPAgqUpMOZMpRBr7lQJInRLtaQ=w240-h480-rw',
     wade: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA8Jee5KhObkaRCr1jdElCvp6ZoSSCw2K9Eok9bqmAKfi97qLX_7Xu4I9u&s=10',
     leezu: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ06dhZYNHXa2dEd3a3oAjJtFAddNNvY6iSDo6W808evw&s=10'
 };
