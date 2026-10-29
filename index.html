@@ -146,131 +146,143 @@
         .day-card.has-data .day-bar-fill { background:linear-gradient(90deg,#00b894,#55efc4); }
         .day-card.empty .day-amount { color:#94a3b8; font-size:13px; font-weight:500; }
 
-        /* ===== DASHBOARD REDESIGN (mobile-first) ===== */
-        .dashboard { padding:12px; }
+        /* ===== DASHBOARD REDESIGN ===== */
+        .dashboard { padding:14px; }
 
         .dash-header {
             display:flex; align-items:center; justify-content:space-between;
-            flex-wrap:wrap; gap:8px; margin-bottom:12px;
+            flex-wrap:wrap; gap:8px; margin-bottom:14px;
+            padding-bottom:10px; border-bottom:2px solid #f1f0ff;
         }
-        .dash-header h3 { font-size:16px; font-weight:700; color:#1a1a2e; display:flex; align-items:center; gap:6px; }
-        .dash-header h3 .live-indicator { width:7px; height:7px; }
-
-        .dash-stats {
-            display:grid;
-            grid-template-columns:repeat(2, 1fr);
-            gap:8px;
-            margin-bottom:10px;
+        .dash-header h3 {
+            font-size:17px; font-weight:800; color:#1a1a2e;
+            display:flex; align-items:center; gap:6px; margin:0;
         }
-        .dash-stats.three { grid-template-columns:repeat(3, 1fr); }
-
-        .dash-card {
-            background:#fff;
-            border-radius:14px;
-            padding:10px 8px;
-            border:1.5px solid #e2e8f0;
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            gap:4px; text-align:center; min-height:78px;
-            transition:.25s;
-            position:relative; overflow:hidden;
+        .dash-header .dash-clock {
+            font-size:11px; color:#94a3b8; font-weight:600;
+            background:#f8fafc; padding:3px 10px; border-radius:20px;
         }
-        .dash-card:active { transform:scale(.97); }
-        .dash-card .dc-icon {
-            font-size:16px; line-height:1;
-            width:28px; height:28px; border-radius:9px;
-            display:flex; align-items:center; justify-content:center;
-            background:#f1f0ff;
-        }
-        .dash-card .dc-val {
-            font-size:13px; font-weight:800; color:#1a1a2e;
-            word-break:break-word; line-height:1.15;
-        }
-        .dash-card .dc-lbl {
-            font-size:9.5px; color:#64748b; font-weight:600;
-            line-height:1.2;
-        }
-
-        .dash-card.morning { border-color:#fcd34d; }
-        .dash-card.morning .dc-icon { background:#fef9e7; }
-        .dash-card.morning .dc-val { color:#d97706; }
-
-        .dash-card.night { border-color:#818cf8; }
-        .dash-card.night .dc-icon { background:#eef2ff; }
-        .dash-card.night .dc-val { color:#4f46e5; }
-
-        .dash-card.total { border-color:#00b894; background:linear-gradient(135deg,#f0fdf6,#fff); }
-        .dash-card.total .dc-icon { background:#d1fae5; }
-        .dash-card.total .dc-val { color:#059669; font-size:14px; }
-
-        .dash-card.orders { border-color:#6c5ce7; }
-        .dash-card.orders .dc-icon { background:#f1f0ff; }
-        .dash-card.orders .dc-val { color:#6c5ce7; }
 
         .dash-section-title {
-            font-size:13px; font-weight:700; color:#1a1a2e;
-            margin:14px 0 8px; display:flex; align-items:center; gap:6px;
+            font-size:13px; font-weight:800; color:#1a1a2e;
+            margin:18px 0 10px; display:flex; align-items:center; gap:6px;
+        }
+        .dash-section-title::before {
+            content:''; width:4px; height:16px; border-radius:4px;
+            background:linear-gradient(180deg,#6c5ce7,#a29bfe);
+            display:inline-block;
         }
 
-        .cashier-grid {
-            display:grid; grid-template-columns:repeat(2,1fr); gap:6px;
+        .revenue-grid {
+            display:grid; grid-template-columns:1fr 1fr; gap:10px;
         }
+        .revenue-card {
+            border-radius:16px; padding:14px 12px;
+            display:flex; flex-direction:column; gap:6px;
+            position:relative; overflow:hidden; min-height:96px;
+            border:2px solid transparent;
+        }
+        .revenue-card .rc-top { display:flex; align-items:center; gap:8px; }
+        .revenue-card .rc-icon {
+            width:34px; height:34px; border-radius:11px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:17px; flex-shrink:0;
+        }
+        .revenue-card .rc-label { font-size:11px; font-weight:700; color:#64748b; line-height:1.2; }
+        .revenue-card .rc-value { font-size:17px; font-weight:800; line-height:1.1; word-break:break-word; margin-top:2px; }
+        .revenue-card .rc-sub { font-size:10px; font-weight:600; color:#94a3b8; }
+
+        .revenue-card.morning { background:linear-gradient(135deg,#fffbeb,#fff); border-color:#fcd34d; }
+        .revenue-card.morning .rc-icon { background:#fef3c7; }
+        .revenue-card.morning .rc-value { color:#d97706; }
+
+        .revenue-card.night { background:linear-gradient(135deg,#eef2ff,#fff); border-color:#818cf8; }
+        .revenue-card.night .rc-icon { background:#e0e7ff; }
+        .revenue-card.night .rc-value { color:#4f46e5; }
+
+        .revenue-card.total {
+            grid-column:1 / -1;
+            background:linear-gradient(135deg,#ecfdf5,#fff);
+            border-color:#00b894;
+        }
+        .revenue-card.total .rc-icon { background:#d1fae5; }
+        .revenue-card.total .rc-value { color:#059669; font-size:22px; }
+
+        .orders-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+        .order-stat {
+            background:#fff; border:1.5px solid #e2e8f0; border-radius:14px;
+            padding:12px 8px; display:flex; flex-direction:column;
+            align-items:center; gap:3px; text-align:center; min-height:80px;
+            justify-content:center;
+        }
+        .order-stat .os-icon { font-size:18px; line-height:1; }
+        .order-stat .os-val { font-size:19px; font-weight:800; color:#6c5ce7; line-height:1; }
+        .order-stat .os-lbl { font-size:10px; color:#64748b; font-weight:600; }
+
+        .cashier-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
         .cashier-chip {
-            background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:11px;
-            padding:8px 10px; display:flex; align-items:center; justify-content:space-between;
-            gap:6px; min-height:44px;
+            background:#fff; border:1.5px solid #e2e8f0; border-radius:12px;
+            padding:10px 12px; display:flex; align-items:center;
+            justify-content:space-between; gap:8px; min-height:48px;
         }
-        .cashier-chip .cc-name { font-size:11px; font-weight:600; color:#475569; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .cashier-chip .cc-name {
+            font-size:12px; font-weight:700; color:#475569;
+            overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        }
         .cashier-chip .cc-count {
-            font-size:13px; font-weight:800; color:#6c5ce7;
-            background:#f1f0ff; border-radius:8px; padding:2px 8px; min-width:26px; text-align:center;
+            font-size:14px; font-weight:800; color:#6c5ce7;
+            background:#f1f0ff; border-radius:9px; padding:3px 10px;
+            min-width:30px; text-align:center; flex-shrink:0;
         }
 
         .dash-orders-box {
-            max-height:280px; overflow-y:auto;
-            border:1.5px solid #e2e8f0; border-radius:12px;
+            border:1.5px solid #e2e8f0; border-radius:14px;
             padding:6px; background:#fbfbfe;
         }
-        .dash-empty {
-            text-align:center; color:#94a3b8; font-size:12px; padding:20px 8px;
-            display:flex; flex-direction:column; align-items:center; gap:6px;
-        }
-        .dash-empty .big { font-size:28px; }
-
         .dash-orders-box .order-item {
-            padding:7px 8px; margin-bottom:5px; border-radius:9px;
-            font-size:12px; border-right-width:3px; gap:5px;
+            display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+            padding:9px 10px; background:#fff; border-radius:10px;
+            margin-bottom:6px; font-size:12px;
+            border-right:4px solid #6c5ce7;
+            box-shadow:0 2px 6px rgba(0,0,0,.03);
         }
-        .dash-orders-box .order-item .oi-num {
-            font-weight:800; color:#6c5ce7; font-size:11px; min-width:16px;
+        .dash-orders-box .order-item:last-child { margin-bottom:0; }
+        .dash-orders-box .oi-num {
+            font-weight:800; color:#6c5ce7; font-size:11px;
+            min-width:18px; text-align:center;
         }
-        .dash-orders-box .order-item .oi-items {
-            flex:1 1 100%; order:3; font-size:11px; color:#475569;
-            line-height:1.35; margin-top:2px;
+        .dash-orders-box .oi-items {
+            flex:1 1 100%; order:3; font-size:11px;
+            color:#475569; line-height:1.4; margin-top:3px;
         }
-        .dash-orders-box .order-item .oi-total { font-weight:800; color:#1a1a2e; font-size:12px; }
-        .dash-orders-box .order-item .oi-meta { font-size:9.5px; color:#94a3b8; }
-        .order-type-badge { padding:2px 7px; font-size:9px; }
+        .dash-orders-box .oi-total {
+            font-weight:800; color:#1a1a2e; font-size:13px; margin-right:auto;
+        }
+        .dash-orders-box .oi-meta { font-size:10px; color:#94a3b8; }
+
+        .dash-empty {
+            text-align:center; color:#94a3b8; font-size:12px;
+            padding:24px 8px; display:flex; flex-direction:column;
+            align-items:center; gap:8px;
+        }
+        .dash-empty .big { font-size:32px; opacity:.7; }
 
         @media (max-width:360px) {
-            .dash-stats.three { grid-template-columns:repeat(2,1fr); }
-            .dash-card .dc-val { font-size:12px; }
-            .dash-card .dc-lbl { font-size:9px; }
+            .orders-grid { grid-template-columns:repeat(2,1fr); }
             .cashier-grid { grid-template-columns:1fr; }
+            .revenue-card .rc-value { font-size:15px; }
+            .revenue-card.total .rc-value { font-size:19px; }
         }
 
-        @media (min-width:600px) {
-            .dash-stats { grid-template-columns:repeat(3,1fr); gap:10px; }
-            .dash-stats.three { grid-template-columns:repeat(3,1fr); }
-            .dash-card { min-height:86px; padding:12px 10px; }
-            .dash-card .dc-val { font-size:15px; }
-            .dash-card .dc-lbl { font-size:10.5px; }
-            .dash-card.total .dc-val { font-size:16px; }
+        @media (min-width:700px) {
+            .dashboard { padding:20px; }
+            .revenue-grid { grid-template-columns:repeat(3,1fr); }
+            .revenue-card.total { grid-column:auto; }
             .cashier-grid { grid-template-columns:repeat(3,1fr); }
-            .dash-orders-box { max-height:320px; }
+            .dash-orders-box .oi-items { flex:1; order:0; margin-top:0; }
         }
-        @media (min-width:900px) {
+        @media (min-width:1000px) {
             .cashier-grid { grid-template-columns:repeat(4,1fr); }
-            .dash-orders-box .order-item .oi-items { flex:1; order:0; margin-top:0; }
         }
 
         ::-webkit-scrollbar { width:5px; }
@@ -608,44 +620,53 @@
                         <div class="dashboard">
                             <div class="dash-header">
                                 <h3>📊 داشبۆرد <span class="live-indicator"></span></h3>
-                                <span style="font-size:10px;color:#94a3b8;font-weight:600;">${now()}</span>
+                                <span class="dash-clock">${now()}</span>
                             </div>
 
                             <div class="dash-section-title">💰 داهات</div>
-                            <div class="dash-stats three">
-                                <div class="dash-card morning">
-                                    <div class="dc-icon">🌅</div>
-                                    <div class="dc-val">${formatPrice(morningRev)}</div>
-                                    <div class="dc-lbl">بەیانی (٩–٥:٣٠)</div>
+                            <div class="revenue-grid">
+                                <div class="revenue-card morning">
+                                    <div class="rc-top">
+                                        <div class="rc-icon">🌅</div>
+                                        <div class="rc-label">بەیانی</div>
+                                    </div>
+                                    <div class="rc-value">${formatPrice(morningRev)}</div>
+                                    <div class="rc-sub">٩:٠٠ – ٥:٣٠</div>
                                 </div>
-                                <div class="dash-card night">
-                                    <div class="dc-icon">🌙</div>
-                                    <div class="dc-val">${formatPrice(nightRev)}</div>
-                                    <div class="dc-lbl">شەو (٥:٣٠–٣)</div>
+                                <div class="revenue-card night">
+                                    <div class="rc-top">
+                                        <div class="rc-icon">🌙</div>
+                                        <div class="rc-label">شەو</div>
+                                    </div>
+                                    <div class="rc-value">${formatPrice(nightRev)}</div>
+                                    <div class="rc-sub">٥:٣٠ – ٣:٠٠</div>
                                 </div>
-                                <div class="dash-card total">
-                                    <div class="dc-icon">💵</div>
-                                    <div class="dc-val">${formatPrice(totalRev)}</div>
-                                    <div class="dc-lbl">کۆی ئەمڕۆ</div>
+                                <div class="revenue-card total">
+                                    <div class="rc-top">
+                                        <div class="rc-icon">💵</div>
+                                        <div class="rc-label">کۆی داهاتی ئەمڕۆ</div>
+                                    </div>
+                                    <div class="rc-value">${formatPrice(totalRev)}</div>
+                                    <div class="rc-sub">${todayOrders.length} ئۆردەر</div>
                                 </div>
                             </div>
 
                             <div class="dash-section-title">🧾 ئۆردەرەکان</div>
-                            <div class="dash-stats">
-                                <div class="dash-card orders">
-                                    <div class="dc-icon">🌅</div>
-                                    <div class="dc-val">${morning.length}</div>
-                                    <div class="dc-lbl">ئۆردەری بەیانی</div>
+                            <div class="orders-grid">
+                                <div class="order-stat">
+                                    <span class="os-icon">🌅</span>
+                                    <span class="os-val">${morning.length}</span>
+                                    <span class="os-lbl">بەیانی</span>
                                 </div>
-                                <div class="dash-card orders">
-                                    <div class="dc-icon">🌙</div>
-                                    <div class="dc-val">${night.length}</div>
-                                    <div class="dc-lbl">ئۆردەری شەو</div>
+                                <div class="order-stat">
+                                    <span class="os-icon">🌙</span>
+                                    <span class="os-val">${night.length}</span>
+                                    <span class="os-lbl">شەو</span>
                                 </div>
-                                <div class="dash-card orders">
-                                    <div class="dc-icon">📦</div>
-                                    <div class="dc-val">${todayOrders.length}</div>
-                                    <div class="dc-lbl">کۆی ئۆردەر</div>
+                                <div class="order-stat">
+                                    <span class="os-icon">📦</span>
+                                    <span class="os-val">${todayOrders.length}</span>
+                                    <span class="os-lbl">کۆی گشتی</span>
                                 </div>
                             </div>
 
@@ -658,7 +679,7 @@
                                             <span class="cc-count">${c}</span>
                                         </div>`).join('')}
                                 </div>
-                            ` : `<div class="dash-empty"><span class="big">👤</span>هیچ داتایەک نییە</div>`}
+                            ` : `<div class="dash-empty"><span class="big">👤</span>هیچ کاشێرێک نییە</div>`}
 
                             <div class="dash-section-title">📋 لیستی ئۆردەرەکان</div>
                             <div class="dash-orders-box">
@@ -666,9 +687,9 @@
                                     <div class="order-item" style="border-right-color:${o.orderType==='dine'?'#3498db':'#f39c12'};">
                                         <span class="oi-num">${i+1}</span>
                                         <span class="order-type-badge ${o.orderType}">${o.orderType==='dine'?'🍽️ ساڵە':'🛍️ سەفەری'}</span>
-                                        <span class="oi-items">${o.items.map(it=>`${it.name} ×${it.qty}`).join('، ')}</span>
                                         <span class="oi-total">${formatPrice(o.total)}</span>
-                                        ${o.discount>0?`<span style="font-size:9px;color:#e17055;">🔖%${o.discount}</span>`:''}
+                                        <span class="oi-items">${o.items.map(it=>`${it.name} ×${it.qty}`).join('، ')}</span>
+                                        ${o.discount>0?`<span style="font-size:9px;color:#e17055;font-weight:700;">🔖 %${o.discount}</span>`:''}
                                         <span class="oi-meta">${o.time}${o.cashier?' · '+o.cashier:''}</span>
                                     </div>`).join('') : `
                                     <div class="dash-empty"><span class="big">📭</span>هیچ ئۆردەرێک نییە</div>`}
