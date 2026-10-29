@@ -149,6 +149,229 @@
         ::-webkit-scrollbar { width:5px; }
         ::-webkit-scrollbar-track { background:#f1f1f1; border-radius:8px; }
         ::-webkit-scrollbar-thumb { background:#c4b5fd; border-radius:8px; }
+
+        /* ============================================================
+           RESPONSIVE DESIGN - هەمان شێوازی سیستەمی کاشێر
+           ============================================================ */
+
+        /* ===== تابلێت (≤1024px) ===== */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            .partner-detail-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+            }
+        }
+
+        /* ===== مۆبایل و تابلێتی بچووک (≤768px) ===== */
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .login-box { padding: 20px 16px; }
+            .login-box h2 { font-size: 20px; }
+            .login-box input { padding: 12px 14px; font-size: 15px; }
+            .btn { font-size: 15px; padding: 12px 20px; }
+            .btn-sm { font-size: 11px; padding: 5px 10px; }
+
+            .header-bar .title { font-size: 15px; }
+            .header-bar .user-info { font-size: 11px; }
+            .back-btn { font-size: 12px; padding: 3px 8px; }
+
+            .manager-menu button {
+                font-size: 11px;
+                padding: 6px 10px;
+                min-width: 70px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px !important;
+            }
+            .stats-grid .stat-card:nth-child(3) {
+                grid-column: 1 / -1 !important;
+            }
+            .stat-card {
+                padding: 10px 6px !important;
+                border-radius: 10px !important;
+            }
+            .stat-card .number {
+                font-size: 16px !important;
+            }
+            .stat-card .label {
+                font-size: 10px !important;
+                line-height: 1.3 !important;
+            }
+
+            table { font-size: 11px; }
+            table th, table td { padding: 6px 4px; }
+
+            .order-item {
+                font-size: 12px;
+                padding: 5px 8px;
+                border-right-width: 3px;
+            }
+            .order-type-badge { font-size: 9px; padding: 1px 6px; }
+
+            .partner-detail-grid { grid-template-columns: 1fr !important; }
+            .partner-detail-card { padding: 12px; }
+            .partner-detail-name { font-size: 16px; }
+            .partner-detail-logo { width: 34px; height: 34px; }
+            .partner-stat-number { font-size: 16px; }
+            .partner-order-item { font-size: 11px; padding: 4px 6px; }
+
+            .modal { padding: 16px; }
+            .modal h3 { font-size: 18px; }
+
+            .monthly-trend-header h3 { font-size: 16px; }
+            .monthly-trend-summary .summary-box { padding: 6px 12px; min-width: 85px; }
+            .monthly-trend-summary .summary-box .val { font-size: 13px; }
+            .monthly-trend-summary .summary-box .lbl { font-size: 9px; }
+            .month-info-bar { padding: 8px 12px; }
+            .month-info-bar .month-name { font-size: 14px; }
+            .month-info-bar .month-dates { font-size: 11px; }
+            .day-cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+                gap: 8px;
+            }
+            .day-card { padding: 10px; min-height: 110px; }
+            .day-card .day-num { font-size: 17px; }
+            .day-card .day-amount { font-size: 13px; }
+
+            .toast { font-size: 13px; padding: 10px 16px; bottom: 12px; right: 12px; left: 12px; }
+        }
+
+        /* ===== مۆبایلی بچووک (≤480px) ===== */
+        @media (max-width: 480px) {
+            body { padding: 4px; }
+            .login-box { padding: 16px 12px; border-radius: 18px; }
+            .login-box h2 { font-size: 18px; }
+            .logo-text { font-size: 22px; }
+            .subtitle { font-size: 11px; }
+            .login-box input { padding: 11px 12px; font-size: 15px; border-radius: 10px; }
+            .btn { font-size: 14px; padding: 11px 16px; border-radius: 10px; }
+            .btn-sm { font-size: 10px; padding: 4px 8px; }
+
+            .header-bar .title { font-size: 14px; }
+            .header-bar .user-info { font-size: 10px; }
+            .back-btn { font-size: 11px; padding: 2px 6px; }
+
+            .manager-menu { gap: 4px; }
+            .manager-menu button {
+                font-size: 10px;
+                padding: 5px 8px;
+                min-width: 60px;
+                border-radius: 8px;
+            }
+
+            .stats-grid {
+                gap: 5px !important;
+            }
+            .stat-card .number { font-size: 14px !important; }
+            .stat-card .label { font-size: 9px !important; }
+
+            table { font-size: 10px; }
+            table th, table td { padding: 4px 3px; }
+
+            .order-item {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 2px 6px !important;
+                padding: 5px 6px !important;
+                font-size: 10px !important;
+                border-radius: 6px !important;
+                margin-bottom: 4px !important;
+                background: #f8fafc !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+            }
+            .order-item > span:nth-child(1) {
+                grid-column: 1/2 !important;
+                font-size: 10px !important;
+                font-weight: 700 !important;
+                color: #6c5ce7 !important;
+            }
+            .order-item > span:nth-child(2) {
+                grid-column: 2/3 !important;
+                justify-self: end !important;
+                font-size: 8px !important;
+            }
+            .order-item > span:nth-child(3) {
+                grid-column: 1/3 !important;
+                font-size: 9px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+            .order-item > span:nth-child(4) {
+                grid-column: 1/2 !important;
+                font-size: 10px !important;
+                font-weight: 700 !important;
+                color: #6c5ce7 !important;
+            }
+            .order-item > span:nth-child(5),
+            .order-item > span:nth-child(6),
+            .order-item > span:nth-child(7) {
+                font-size: 8px !important;
+                color: #94a3b8 !important;
+            }
+
+            .partner-detail-card { padding: 10px; border-radius: 12px; }
+            .partner-detail-header { gap: 6px; margin-bottom: 6px; padding-bottom: 6px; }
+            .partner-detail-name { font-size: 14px; }
+            .partner-detail-logo { width: 30px; height: 30px; }
+            .partner-stat-number { font-size: 14px; }
+            .partner-stat-label { font-size: 9px; }
+            .partner-order-item { font-size: 10px; padding: 3px 5px; }
+
+            .modal { padding: 14px; border-radius: 16px; }
+            .modal h3 { font-size: 16px; }
+            .form-group label { font-size: 12px; }
+            select, input[type="text"], input[type="number"] {
+                padding: 7px 10px;
+                font-size: 13px;
+                border-radius: 8px;
+            }
+
+            .monthly-trend-page { padding: 12px; border-radius: 16px; }
+            .monthly-trend-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding-bottom: 10px;
+            }
+            .monthly-trend-header h3 { font-size: 14px; }
+            .monthly-trend-summary { width: 100%; gap: 5px; }
+            .monthly-trend-summary .summary-box { flex: 1; padding: 5px 8px; min-width: 0; }
+            .monthly-trend-summary .summary-box .val { font-size: 11px; }
+            .monthly-trend-summary .summary-box .lbl { font-size: 8px; }
+            .month-info-bar {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 4px;
+                padding: 8px 10px;
+            }
+            .month-info-bar .month-name { font-size: 12px; }
+            .month-info-bar .month-dates { font-size: 9px; }
+            .month-info-bar .month-days-count { font-size: 10px; padding: 3px 10px; }
+
+            .day-cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 6px !important;
+            }
+            .day-card {
+                padding: 8px !important;
+                min-height: 95px !important;
+                border-radius: 10px !important;
+            }
+            .day-card .day-num { font-size: 15px !important; }
+            .day-card .day-name { font-size: 8px !important; padding: 1px 5px !important; }
+            .day-card .day-amount { font-size: 11px !important; }
+            .day-card .day-orders-count { font-size: 8px !important; }
+            .day-card .day-badge { font-size: 7px !important; padding: 1px 4px !important; }
+            .day-card .day-bar { height: 3px !important; }
+
+            .toast { font-size: 12px; padding: 8px 12px; }
+        }
     </style>
 </head>
 <body>
@@ -263,7 +486,7 @@
             monthlyResetTimestamp: null
         };
 
-        // ============ RESETS (همان منطق) ============
+        // ============ RESETS ============
         async function performMonthlyReset() {
             const nowD = new Date();
             const bd = getCurrentBusinessDayStart();
@@ -433,11 +656,9 @@
         }
 
         function renderManager() {
-            // ... (هەمان کۆدی manager لە فایلی سەرەوە - بە کورتکراوەی)
             return renderManagerFull();
         }
 
-        // بۆ کورتکردنەوە، لێرە تەنها شێوەی گشتی دەنووسم
         function renderManagerFull() {
             let filteredItems = state.items.filter(i => i.branch === state.selectedBranch);
             const itemsHtml = filteredItems.map(item => `
